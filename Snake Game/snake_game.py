@@ -233,8 +233,8 @@ class SnakeGame:
             self.show_win_message()
     
     def add_barrier(self):
-        # Use last digit of index number (assuming 7 as example)
-        digit = "7"
+        # Use last digit of index number (E252634)
+        digit = "4"
         x = random.randint(-15, 15) * 20
         y = random.randint(-10, 10) * 20
         

@@ -4,6 +4,9 @@ This document provides the complete instructions to develop the **Snake Game** u
 
 ---
 
+
+** Stident ID : E252634
+
 ## 📋 Assignment Scope
 
 The game must include all the following features and levels.
@@ -60,7 +63,7 @@ The game must include all the following features and levels.
 * **File Naming**
 
   * The project folder and all files must include the index number in their filenames.
-  * Example: `1234567_SnakeGame.zip`.
+  * Example: `E252634_SnakeGame.zip`.
 
 ---
 
