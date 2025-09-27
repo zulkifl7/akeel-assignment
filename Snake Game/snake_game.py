@@ -44,6 +44,8 @@ class SnakeGame:
         self.red_food.penup()
         self.red_food.hideturtle()
         self.red_food_active = False
+        self.red_food_timer = 0
+        self.red_food_timeout = 3  # 3 seconds for red food
         
         # Score display
         self.score_display = turtle.Turtle()
@@ -165,6 +167,7 @@ class SnakeGame:
         self.red_food.goto(x, y)
         self.red_food.showturtle()
         self.red_food_active = True
+        self.red_food_timer = time.time()  # Start timer for red food
     
     def check_food_collision(self):
         # Regular food collision
@@ -245,7 +248,16 @@ class SnakeGame:
     
     def check_barrier_collision(self):
         if self.level >= 2 and self.barrier_active:
-            if self.snake_head.distance(self.barrier) < 30:
+            # Only collision from above ends the game
+            snake_x = self.snake_head.xcor()
+            snake_y = self.snake_head.ycor()
+            barrier_x = self.barrier.xcor()
+            barrier_y = self.barrier.ycor()
+            
+            # Check if snake is close to barrier horizontally and approaching from above
+            if (abs(snake_x - barrier_x) < 30 and 
+                snake_y > barrier_y and 
+                snake_y - barrier_y < 30):
                 return True
         return False
     
@@ -268,6 +280,16 @@ class SnakeGame:
             elapsed = time.time() - self.food_timer
             if elapsed >= self.food_timeout:
                 self.place_food()
+    
+    def check_red_food_timeout(self):
+        if self.level >= 4 and self.red_food_active:
+            elapsed = time.time() - self.red_food_timer
+            if elapsed >= self.red_food_timeout:
+                self.red_food.hideturtle()
+                self.red_food_active = False
+                # Respawn red food in a different location after a short delay
+                if random.random() < 0.5:  # 50% chance to respawn immediately
+                    self.place_red_food()
     
     def show_game_over(self):
         self.game_over_display.goto(0, 0)
@@ -306,6 +328,9 @@ class SnakeGame:
             
             # Check food timeout (Level 3)
             self.check_food_timeout()
+            
+            # Check red food timeout (Level 4)
+            self.check_red_food_timeout()
             
             # Level 4: Occasionally spawn red food
             if self.level >= 4 and not self.red_food_active and random.random() < 0.001:
