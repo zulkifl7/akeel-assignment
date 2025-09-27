@@ -34,6 +34,7 @@ The game must include all the following features and levels.
   * A digit (the last digit of the index number) appears on the screen as a barrier.
   * If the snake collides with this digit, the game is over.
   * Food must not spawn too close to this digit (a margin is required).
+  * Food must be Green color.
   * If the snake is near the center when this digit appears, it must automatically shift to a corner.
 
 * **Level 3**

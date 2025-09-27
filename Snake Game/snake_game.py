@@ -32,7 +32,7 @@ class SnakeGame:
         self.food = turtle.Turtle()
         self.food.speed(0)
         self.food.shape("circle")
-        self.food.color("red")
+        self.food.color("green")
         self.food.penup()
         self.place_food()
         
@@ -220,6 +220,11 @@ class SnakeGame:
             # Level 4: Start spawning red food occasionally
             if self.level >= 4 and not self.red_food_active and random.random() < 0.3:
                 self.place_red_food()
+        
+        # Check for win condition: gain 5 points in Level 4 (score >= 8)
+        if self.level == 4 and self.score >= 8:
+            self.game_over = True
+            self.show_win_message()
     
     def add_barrier(self):
         # Use last digit of index number (assuming 7 as example)
@@ -270,6 +275,15 @@ class SnakeGame:
                                    font=("Arial", 36, "bold"))
         self.game_over_display.goto(0, -50)
         self.game_over_display.write(f"Final Score: {self.score}  Level: {self.level}", 
+                                   align="center", font=("Arial", 18, "normal"))
+    
+    def show_win_message(self):
+        self.game_over_display.goto(0, 0)
+        self.game_over_display.color("gold")
+        self.game_over_display.write("YOU WON!", align="center", 
+                                   font=("Arial", 36, "bold"))
+        self.game_over_display.goto(0, -50)
+        self.game_over_display.write(f"Congratulations! Final Score: {self.score}", 
                                    align="center", font=("Arial", 18, "normal"))
     
     def run_game(self):
