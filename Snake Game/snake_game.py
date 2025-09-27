@@ -220,8 +220,11 @@ class SnakeGame:
                 self.add_barrier()
                 self.check_snake_near_center()
             
-            # Level 4: Start spawning red food occasionally
-            if self.level >= 4 and not self.red_food_active and random.random() < 0.3:
+            # Level 4: Start spawning red food immediately when level starts
+            if self.level == 4 and not self.red_food_active:
+                self.place_red_food()
+            # Continue spawning red food occasionally at level 4+
+            elif self.level >= 4 and not self.red_food_active and random.random() < 0.3:
                 self.place_red_food()
         
         # Check for win condition: gain 5 points in Level 4 (score >= 8)
