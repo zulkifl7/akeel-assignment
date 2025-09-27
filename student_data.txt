@@ -1,0 +1,3 @@
+Name   Maths  Tamil  IT
+Kasun  89     34     76
+Nimal  43     76     45
